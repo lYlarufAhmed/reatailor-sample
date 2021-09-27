@@ -1,8 +1,8 @@
 import styled, {css} from "styled-components";
-import logo from './images/logo.png'
-import rec1 from './images/rec1.png'
-import rec2 from './images/rec2.png'
-import rec3 from './images/rec3.png'
+// import logo from '../public/images/logo.png'
+// import rec1 from '../public/images/rec1.png'
+// import rec2 from '../public/images/rec2.png'
+// import rec3 from '../public/images/rec3.png'
 import {ReactComponent as Logout} from './images/logout.svg'
 import {ReactComponent as Bed} from './images/bed.svg'
 import {ReactComponent as Shower} from './images/shower.svg'
@@ -53,7 +53,7 @@ const NavSlice = styled(FlexContainer)`
   }
   ${
           props => props.background && css`
-            background: transparent url(${logo}) ${props.leftPadding} no-repeat padding-box;;
+            background: transparent url('/images/logo.png') ${props.leftPadding} no-repeat padding-box;;
             opacity: 1;
           `
   }
@@ -180,9 +180,9 @@ function App() {
             </TopNav>
             <ListContainer>
                 <Gallery>
-                    <GalleryImage img={rec1}/>
-                    <GalleryImage img={rec2}/>
-                    <GalleryImage img={rec3}/>
+                    <GalleryImage img={'/images/rec1.png'}/>
+                    <GalleryImage img={'/images/rec2.png'}/>
+                    <GalleryImage img={'/images/rec3.png'}/>
                 </Gallery>
                 <Details>
                     <TitleContainer>
