@@ -1,14 +1,15 @@
 import styled, {css} from "styled-components";
-// import logo from '../public/images/logo.png'
-// import rec1 from '../public/images/rec1.png'
-// import rec2 from '../public/images/rec2.png'
-// import rec3 from '../public/images/rec3.png'
+import logo from './images/logo.png'
+import rec1 from './images/rec1.png'
+import rec2 from './images/rec2.png'
+import rec3 from './images/rec3.png'
 import {ReactComponent as Logout} from './images/logout.svg'
 import {ReactComponent as Bed} from './images/bed.svg'
 import {ReactComponent as Shower} from './images/shower.svg'
 import {ReactComponent as Dollar} from './images/vuesax-bold-dollar-square.svg'
 import {ReactComponent as House} from './images/house-fill.svg'
 import {ReactComponent as Location} from './images/vuesax-bold-location.svg'
+import {Link} from 'react-router-dom'
 
 const FlexContainer = styled.div`
   display: flex;
@@ -53,7 +54,7 @@ const NavSlice = styled(FlexContainer)`
   }
   ${
           props => props.background && css`
-            background: transparent url('/images/logo.png') ${props.leftPadding} no-repeat padding-box;;
+            background: transparent url(${logo}) ${props.leftPadding} no-repeat padding-box;;
             opacity: 1;
           `
   }
@@ -66,6 +67,8 @@ const NavLink = styled.span`
   ${props => props.selected && css`
     color: #97DBCD;
     font-weight: bold;
+    text-decoration: none;
+    
   `
   }
   :hover {
@@ -167,7 +170,9 @@ function App() {
                 <NavSlice background color={'blue'} leftPadding={'110px'}/>
                 <NavSlice justifyContent={'space-between'}>
                     <NavLink selected>Home</NavLink>
-                    <NavLink>Link 1</NavLink>
+                    <Link to={'/input'}>
+                        <NavLink>Property Input</NavLink>
+                    </Link>
                     <NavLink>Link 2</NavLink>
                     <NavLink>Link 3</NavLink>
                 </NavSlice>
@@ -180,9 +185,9 @@ function App() {
             </TopNav>
             <ListContainer>
                 <Gallery>
-                    <GalleryImage img={'/images/rec1.png'}/>
-                    <GalleryImage img={'/images/rec2.png'}/>
-                    <GalleryImage img={'/images/rec3.png'}/>
+                    <GalleryImage img={rec1}/>
+                    <GalleryImage img={rec2}/>
+                    <GalleryImage img={rec3}/>
                 </Gallery>
                 <Details>
                     <TitleContainer>
