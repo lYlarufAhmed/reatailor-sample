@@ -24,20 +24,8 @@ let validateSchema = yup.object({
     // notes: yup.string()
 })
 
-
+// TODO: Create a form context for ????
 export default function PropertyInput() {
-    // const formik = useFormik({
-    //     validationSchema: validateSchema,
-    //     initialValues: {
-    //         address_line: ''
-    //     },
-    //     onSubmit: (values) => {
-    //         console.log(values)
-    //
-    //         alert(JSON.stringify(values))
-    //     }
-    // })
-    //
     return (
         <Formik
             initialValues={{
@@ -59,11 +47,7 @@ export default function PropertyInput() {
                               alignItems={'center'}>
 
                             <Box position={'relative'}>
-                                {/*<FormControl id={'address_line'}*/}
-                                {/*             isInvalid={!!formik.errors.address_line && formik.touched.address_line}>*/}
                                 <PropertyField setFieldValue={props.setFieldValue}/>
-                                {/*</FormControl>*/}
-                                {/*<Suggestions items={filteredAddress} formik={formik}/>*/}
                             </Box>
                             <Spacer/>
                             {/*<Box>*/}

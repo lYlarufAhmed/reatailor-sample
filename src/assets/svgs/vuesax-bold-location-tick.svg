@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+  <g id="vuesax_bold_location-tick" data-name="vuesax/bold/location-tick" transform="translate(-236 -188)">
+    <path id="Vector" d="M20.409,7.817A10.042,10.042,0,0,0,10.353,0h-.012A10.049,10.049,0,0,0,.3,7.8c-1.377,6.02,2.31,11.118,5.647,14.338a6.326,6.326,0,0,0,8.808,0C18.088,18.923,21.774,13.837,20.409,7.817Zm-6.23.968L9.513,13.452a.873.873,0,0,1-1.237,0L6.526,11.7a.874.874,0,1,1,1.237-1.237L8.894,11.6l4.048-4.048a.874.874,0,0,1,1.237,1.237Z" transform="translate(239.647 190.333)" fill="#212529"/>
+    <path id="Vector-2" data-name="Vector" d="M0,0H28V28H0Z" transform="translate(236 188)" fill="none" opacity="0"/>
+    <path id="Vector-3" data-name="Vector" d="M0,0H28V28H0Z" transform="translate(264 216) rotate(180)" fill="none" opacity="0"/>
+  </g>
+</svg>

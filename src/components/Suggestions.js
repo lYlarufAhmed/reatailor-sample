@@ -3,7 +3,8 @@ import SuggestionItem from "./SuggestionItem";
 
 export default function Suggestions({items, handleSuggestionItemClick}) {
     return (
-        <Table variant="simple" size={'sm'} position={'absolute'} zIndex={'3'}>
+        <Table backgroundColor={"white"}  variant="simple" size={'lg'}
+               position={'absolute'} zIndex={'3'}>
             <Tbody>
                 {items.map((item) => <SuggestionItem key={item.propery_id}
                                                      handleSuggestionItemClick={handleSuggestionItemClick}

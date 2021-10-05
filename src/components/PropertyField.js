@@ -2,6 +2,7 @@ import {FormControl, Icon, Input, InputGroup, InputLeftElement} from "@chakra-ui
 import React from "react";
 import {Field} from "formik";
 import {HiCurrencyDollar} from "react-icons/hi";
+import {ReactComponent as PropertyIcon} from "../assets/svgs/vuesax-bold-building-3.svg";
 import useAddresses from "../hooks/useAddresses";
 import useFilteredAddresses from "../hooks/useFilteredAddresses";
 import Suggestions from "./Suggestions";
@@ -13,8 +14,8 @@ function CustomField(props) {
 }
 
 export default function PropertyField({setFieldValue}) {
+    // TODO: Create a context to pass the status and handleClick to the child component
     const {addresses, status, error} = useAddresses()
-    const fieldRef = React.useRef(null)
     const [term, setTerm] = React.useState()
     const filteredAddress = useFilteredAddresses({addresses, searchTerm: term})
     const handleSuggestionItemClick = (ev, itemValue) => {
@@ -29,12 +30,12 @@ export default function PropertyField({setFieldValue}) {
                         <InputGroup>
                             <InputLeftElement
                                 pointerEvents="none"
-                                children={<Icon as={HiCurrencyDollar} color={'black'}/>}
+                                children={<Icon as={PropertyIcon} color={'black'}/>}
                             />
                             <Input {...field} borderColor={'#98DFD0'}
                                    id={'address_line'}
                                    borderWidth={'2px'}
-                                   type="text" placeholder="Property"/>
+                                   type="text" placeholder="Property" width={'60ch'}/>
                         </InputGroup>
                     </FormControl>
                     <Suggestions items={filteredAddress} handleSuggestionItemClick={handleSuggestionItemClick}/>

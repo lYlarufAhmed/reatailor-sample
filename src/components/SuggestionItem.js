@@ -7,6 +7,6 @@ export default function SuggestionItem({value, handleSuggestionItemClick}) {
     }
     return (
         <Tr>
-            <Td backgroundColor={'whiteAlpha.200'} onClick={handleClick}>{value}</Td>
+            <Td backgroundColor={'whiteAlpha.200'} _hover={{backgroundColor: 'teal', color: 'white'}} onClick={handleClick}>{value}</Td>
         </Tr>)
 }
