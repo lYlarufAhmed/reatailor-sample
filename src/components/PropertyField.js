@@ -1,17 +1,10 @@
 import {FormControl, Icon, Input, InputGroup, InputLeftElement} from "@chakra-ui/react";
 import React from "react";
 import {Field} from "formik";
-import {HiCurrencyDollar} from "react-icons/hi";
 import {ReactComponent as PropertyIcon} from "../assets/svgs/vuesax-bold-building-3.svg";
 import useAddresses from "../hooks/useAddresses";
 import useFilteredAddresses from "../hooks/useFilteredAddresses";
 import Suggestions from "./Suggestions";
-
-
-function CustomField(props) {
-    const {selected} = props
-
-}
 
 export default function PropertyField({setFieldValue}) {
     // TODO: Create a context to pass the status and handleClick to the child component
