@@ -3,13 +3,14 @@ import {
     FormControl, InputGroup, InputLeftElement, Input, Box, Spacer, Select, ButtonSpinner, Button
 } from "@chakra-ui/react";
 // import {HiOfficeBuilding, HiCurrencyDollar, HiPaperAirplane} from 'react-icons/hi'
-import PropertyInputField from "../components/PropertyInputField";
+import PropertyField from "../components/PropertyField";
 import * as yup from 'yup'
-import {useFormik} from "formik";
+import {Form, Formik} from "formik";
 import React from 'react'
 import getAllAddresses from "../api/property";
 import useAddresses from "../hooks/useAddresses";
 import useFilteredAddresses from "../hooks/useFilteredAddresses";
+import Suggestions from "../components/Suggestions";
 
 
 let validateSchema = yup.object({
@@ -26,87 +27,102 @@ let validateSchema = yup.object({
 
 export default function PropertyInput() {
     const {addresses, status, error} = useAddresses()
-    const formik = useFormik({
-        validationSchema: validateSchema,
-        initialValues: {
-            address_line: ''
-        },
-        onSubmit: (values) => {
-            console.log(values)
-
-            alert(JSON.stringify(values))
-        }
-    })
-
-    const filteredAddress = useFilteredAddresses({addresses, searchTerm: formik.values.address_line})
-    // const handleAddressLineInput = () => {
-    //     if (formik.values.address_line.length > 2) setSearchTerm(formik.values.address_line)
-    // }
+    // const formik = useFormik({
+    //     validationSchema: validateSchema,
+    //     initialValues: {
+    //         address_line: ''
+    //     },
+    //     onSubmit: (values) => {
+    //         console.log(values)
+    //
+    //         alert(JSON.stringify(values))
+    //     }
+    // })
+    //
+    // const filteredAddress = useFilteredAddresses({addresses, searchTerm: formik.values.address_line})
     return (
-        <Flex height={'100vh'} justifyContent={'center'}
-              backgroundColor={'#F4F6FA'}>
-            <Flex direction={'column'} backgroundColor={'yellow'} justifyContent={'center'}
-                  alignItems={'center'} as={'form'} onSubmit={formik.handleSubmit}>
-                {filteredAddress.map(p => <p key={p.property_id}>{p.full_address}</p>)}
-                <Box>
-                    <FormControl id={'address_line'}
-                                 isInvalid={!!formik.errors.address_line && formik.touched.address_line}>
-                        <PropertyInputField formik={formik}/>
-                    </FormControl>
-                </Box>
-                <Spacer/>
-                {/*<Box>*/}
-
-                {/*    <FormControl id={'revenue'}>*/}
-                {/*        <InputGroup>*/}
-                {/*            <InputLeftElement*/}
-                {/*                pointerEvents="none"*/}
-                {/*                children={<Icon as={HiCurrencyDollar} color={'black'}/>}*/}
-                {/*            />*/}
-                {/*            <Input borderColor={'#98DFD0'} borderWidth={'2px'} type="text" placeholder="Revenue"/>*/}
-                {/*        </InputGroup>*/}
-                {/*    </FormControl>*/}
-
-                {/*</Box>*/}
-                {/*<Spacer/>*/}
-                {/*<Box width={'100%'}>*/}
-
-                {/*    <FormControl id={'property-type'}>*/}
-                {/*        <InputGroup>*/}
-                {/*            <InputLeftElement paddingRight={'1rem'} children={<HiPaperAirplane/>}/>*/}
+        <Formik
+            initialValues={{
+                address_line: '',
+            }}
+            validationSchema={validateSchema}
+            onSubmit={(values) => {
+                console.log(values)
+                alert(JSON.stringify(values))
+            }}
+        >
+            {props => (
 
 
-                {/*                <Select isFullWidth={true} size={'md'} borderColor={'#98DFD0'} borderWidth={'2px'}*/}
-                {/*                        type="select" placeholder="Select Type">*/}
-                {/*                    <option value={'1'}>Option 1</option>*/}
-                {/*                    <option value={'1'}>Option 1</option>*/}
-                {/*                    <option value={'1'}>Option 1</option>*/}
-                {/*                    <option value={'1'}>Option 1</option>*/}
-                {/*                </Select>*/}
-                {/*        </InputGroup>*/}
-                {/*    </FormControl>*/}
-                {/*</Box>*/}
+                <Flex height={'100vh'} justifyContent={'center'}
+                      backgroundColor={'#F4F6FA'}>
+                    <Form>
+                        <Flex direction={'column'} backgroundColor={'yellow'} justifyContent={'center'}
+                              alignItems={'center'}>
 
-                {/*<Box width={'100%'}>*/}
-                {/*    <FormControl id={'property-type'}>*/}
-                {/*        <InputGroup>*/}
-                {/*            <InputLeftElement paddingRight={'1rem'} children={<HiPaperAirplane/>}/>*/}
+                            <Box>
+                                {/*<FormControl id={'address_line'}*/}
+                                {/*             isInvalid={!!formik.errors.address_line && formik.touched.address_line}>*/}
+                                <PropertyField/>
+                                {/*</FormControl>*/}
+                                {/*<Suggestions items={filteredAddress} formik={formik}/>*/}
+                            </Box>
+                            <Spacer/>
+                            {/*<Box>*/}
+
+                            {/*    <FormControl id={'revenue'}>*/}
+                            {/*        <InputGroup>*/}
+                            {/*            <InputLeftElement*/}
+                            {/*                pointerEvents="none"*/}
+                            {/*                children={<Icon as={HiCurrencyDollar} color={'black'}/>}*/}
+                            {/*            />*/}
+                            {/*            <Input borderColor={'#98DFD0'} borderWidth={'2px'} type="text" placeholder="Revenue"/>*/}
+                            {/*        </InputGroup>*/}
+                            {/*    </FormControl>*/}
+
+                            {/*</Box>*/}
+                            {/*<Spacer/>*/}
+                            {/*<Box width={'100%'}>*/}
+
+                            {/*    <FormControl id={'property-type'}>*/}
+                            {/*        <InputGroup>*/}
+                            {/*            <InputLeftElement paddingRight={'1rem'} children={<HiPaperAirplane/>}/>*/}
 
 
-                {/*                <Select isFullWidth={true} size={'md'} borderColor={'#98DFD0'} borderWidth={'2px'}*/}
-                {/*                        type="select" placeholder="Select Type">*/}
-                {/*                    <option value={'1'}>Option 1</option>*/}
-                {/*                    <option value={'1'}>Option 1</option>*/}
-                {/*                    <option value={'1'}>Option 1</option>*/}
-                {/*                    <option value={'1'}>Option 1</option>*/}
-                {/*                </Select>*/}
-                {/*        </InputGroup>*/}
-                {/*    </FormControl>*/}
-                {/*</Box>*/}
-                <Button colorScheme={'teal'} variant={'solid'} type={'submit'}>Submit</Button>
+                            {/*                <Select isFullWidth={true} size={'md'} borderColor={'#98DFD0'} borderWidth={'2px'}*/}
+                            {/*                        type="select" placeholder="Select Type">*/}
+                            {/*                    <option value={'1'}>Option 1</option>*/}
+                            {/*                    <option value={'1'}>Option 1</option>*/}
+                            {/*                    <option value={'1'}>Option 1</option>*/}
+                            {/*                    <option value={'1'}>Option 1</option>*/}
+                            {/*                </Select>*/}
+                            {/*        </InputGroup>*/}
+                            {/*    </FormControl>*/}
+                            {/*</Box>*/}
 
-            </Flex>
-        </Flex>
+                            {/*<Box width={'100%'}>*/}
+                            {/*    <FormControl id={'property-type'}>*/}
+                            {/*        <InputGroup>*/}
+                            {/*            <InputLeftElement paddingRight={'1rem'} children={<HiPaperAirplane/>}/>*/}
 
+
+                            {/*                <Select isFullWidth={true} size={'md'} borderColor={'#98DFD0'} borderWidth={'2px'}*/}
+                            {/*                        type="select" placeholder="Select Type">*/}
+                            {/*                    <option value={'1'}>Option 1</option>*/}
+                            {/*                    <option value={'1'}>Option 1</option>*/}
+                            {/*                    <option value={'1'}>Option 1</option>*/}
+                            {/*                    <option value={'1'}>Option 1</option>*/}
+                            {/*                </Select>*/}
+                            {/*        </InputGroup>*/}
+                            {/*    </FormControl>*/}
+                            {/*</Box>*/}
+                            <Button colorScheme={'teal'} variant={'solid'} isLoading={props.isSubmitting}
+                                    type={'submit'}>Submit</Button>
+
+                        </Flex>
+                    </Form>
+                </Flex>
+            )}
+        </Formik>
     )
 }
