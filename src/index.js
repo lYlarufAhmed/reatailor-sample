@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Home from './pages/Home';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import PropertyInput from "./PropertyInput";
+import PropertyInput from "./pages/PropertyInput";
 import {ChakraProvider} from "@chakra-ui/react";
 
 
@@ -13,8 +13,8 @@ ReactDOM.render(
         <ChakraProvider>
             <Router>
                 <Switch>
-                    <Route to={'/input'} component={PropertyInput}/>
-                    <Route to={'/'} exact component={App}/>
+                    <Route path={'/'} exact component={Home}/>
+                    <Route path={'/input'} component={PropertyInput}/>
                 </Switch>
             </Router>
         </ChakraProvider>

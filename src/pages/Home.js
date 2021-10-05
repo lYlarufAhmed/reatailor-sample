@@ -1,14 +1,14 @@
 import styled, {css} from "styled-components";
-import logo from './images/logo.png'
-import rec1 from './images/rec1.png'
-import rec2 from './images/rec2.png'
-import rec3 from './images/rec3.png'
-import {ReactComponent as Logout} from './images/logout.svg'
-import {ReactComponent as Bed} from './images/bed.svg'
-import {ReactComponent as Shower} from './images/shower.svg'
-import {ReactComponent as Dollar} from './images/vuesax-bold-dollar-square.svg'
-import {ReactComponent as House} from './images/house-fill.svg'
-import {ReactComponent as Location} from './images/vuesax-bold-location.svg'
+import logo from '../assets/images/logo.png'
+import rec1 from '../assets/images/rec1.png'
+import rec2 from '../assets/images/rec2.png'
+import rec3 from '../assets/images/rec3.png'
+import {ReactComponent as Logout} from '../assets/images/logout.svg'
+import {ReactComponent as Bed} from '../assets/images/bed.svg'
+import {ReactComponent as Shower} from '../assets/images/shower.svg'
+import {ReactComponent as Dollar} from '../assets/images/vuesax-bold-dollar-square.svg'
+import {ReactComponent as House} from '../assets/images/house-fill.svg'
+import {ReactComponent as Location} from '../assets/images/vuesax-bold-location.svg'
 import {Link} from 'react-router-dom'
 
 const FlexContainer = styled.div`
@@ -163,7 +163,7 @@ const PrimaryButton = styled.button`
 `
 
 
-function App() {
+function Home() {
     return (
         <AppWrapper>
             <TopNav>
@@ -173,7 +173,7 @@ function App() {
                     <Link to={'/input'}>
                         <NavLink>Property Input</NavLink>
                     </Link>
-                    <NavLink>Link 2</NavLink>
+                    <NavLink>Link2</NavLink>
                     <NavLink>Link 3</NavLink>
                 </NavSlice>
                 <NavSlice justifyContent={'flex-end'} rightPadding={'50px'}>
@@ -224,4 +224,4 @@ function App() {
     );
 }
 
-export default App;
+export default Home;
