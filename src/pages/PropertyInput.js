@@ -26,7 +26,6 @@ let validateSchema = yup.object({
 
 
 export default function PropertyInput() {
-    const {addresses, status, error} = useAddresses()
     // const formik = useFormik({
     //     validationSchema: validateSchema,
     //     initialValues: {
@@ -39,7 +38,6 @@ export default function PropertyInput() {
     //     }
     // })
     //
-    // const filteredAddress = useFilteredAddresses({addresses, searchTerm: formik.values.address_line})
     return (
         <Formik
             initialValues={{
@@ -60,10 +58,10 @@ export default function PropertyInput() {
                         <Flex direction={'column'} backgroundColor={'yellow'} justifyContent={'center'}
                               alignItems={'center'}>
 
-                            <Box>
+                            <Box position={'relative'}>
                                 {/*<FormControl id={'address_line'}*/}
                                 {/*             isInvalid={!!formik.errors.address_line && formik.touched.address_line}>*/}
-                                <PropertyField/>
+                                <PropertyField setFieldValue={props.setFieldValue}/>
                                 {/*</FormControl>*/}
                                 {/*<Suggestions items={filteredAddress} formik={formik}/>*/}
                             </Box>
