@@ -1,89 +1,128 @@
 import React from 'react'
-import {Text, Flex, Box} from '@chakra-ui/react'
-// import {CUIAutoComplete} from 'chakra-ui-autocomplete'
-// import {CUIAutoComplete} from "chakra-ui-autocomplete";
-import {ModifiedCUIAutocomplete as CUIAutoComplete} from "./ModifiedCUIAutocomplete";
+import {Text, Flex, Box, Input, FormControl} from '@chakra-ui/react'
 import {FieldArray} from "formik";
+import TagSuggestions from "./TagSuggestions";
+import useTags from "../hooks/useTags";
 
-
-const tagOptions = [
-    {value: '1', label: 'Ski Resort'},
-    {value: '2', label: 'Hot Tub'},
-    {value: '3', label: 'Mountain Views'},
-    {value: '4', label: 'Recently Updated'},
-    {value: '5', label: 'Private Pool'},
-    {value: '6', label: 'Resort Pool'},
+// TODO: make a network call
+const tags = [
+    {tag_id: '1', tag: 'Ski Resort'},
+    {tag_id: '2', tag: 'Hot Tub'},
+    {tag_id: '3', tag: 'Mountain Views'},
+    {tag_id: '4', tag: 'Recently Updated'},
+    {tag_id: '5', tag: 'Private Pool'},
+    {tag_id: '6', tag: 'Resort Pool'},
 ]
 
+
+function SelectedItemRenderer({value, label, handleDelete}) {
+    return (
+        <Flex alignItems={'center'} justifyContent={'space-around'}
+              p={'8px 10px'} backgroundColor={'#1EBF99'}
+              margin={'.5rem'}
+        >
+            <Text fontSize={'xs'} letterSpacing={'.08rem'} fontWeight={'500'} color={"white"}
+                  marginRight={'15px'}>{label}</Text><Text color={'white'} onClick={handleDelete}>x</Text>
+        </Flex>
+    )
+}
+
+
 export default function TagsField({setFieldValue}) {
+    // the items showed in the suggestion dropdown ( fetched from db and are not selected)
+    // TODO: do a fetch call
+    const {tags: tagOptions, create, status, error} = useTags()
     const [pickerItems, setPickerItems] = React.useState(tagOptions);
-    const [selectedItems, setSelectedItems] = React.useState([]);
+    const [showSuggestions, setShowSuggestions] = React.useState(false)
+    const [currentVal, setCurrentVal] = React.useState('')
 
-    const handleCreateItem = (item) => {
-        setPickerItems((curr) => [...curr, item]);
-        setSelectedItems((curr) => [...curr, item]);
-    };
-
-    const handleSelectedItemsChange = (selectedItems) => {
-        if (selectedItems) {
-            setSelectedItems(selectedItems);
-        }
-    };
-
-    const customRender = (selected) => {
-        return (
-            <Flex flexDir="row" alignItems="center">
-                <Text>{selected.label}</Text>
-            </Flex>
-        )
-    }
-
-    const customCreateItemRender = (value) => {
-        return (
-            <Text>
-                <Box as='span'>Create</Box>{' '}
-                <Box as='span' bg='red.300' fontWeight='bold'>
-                    "{value}"
-                </Box>
-            </Text>
-        )
-    }
+    React.useEffect(() => {
+        setPickerItems(tagOptions)
+    }, [tagOptions])
 
     return (
-        <FieldArray name={'tags'} render={(arrayHelper) => (<CUIAutoComplete
-                // Customize the selected tags
-                tagStyleProps={{
-                    rounded: 'md',
-                    bg: '#1EBF99',
-                    textAlign: 'left',
-                    font: 'normal normal medium 16px/25px Poppins',
-                    color: "#FFFFFF",
-                }}
-                label="Tags"
-                labelStyleProps={{
-                    textAlign: 'left',
-                    font: 'normal normal medium 25px / 38px Poppins',
-                    fontWeight: "bolder",
-                    letterSpacing: '0.31px',
-                    color: '#1D1F2B',
-                    opacity: 1,
-                }}
-                placeholder="Choose/Create Tags"
-                onCreateItem={handleCreateItem}
+        <FieldArray name={'tags'} render={({form}) => (
+            <FormControl isInvalid={form.errors.tags && form.touched.tags}>
+                <Text marginLeft={'10px'} fontWeight={'bold'} fontSize={'xl'}>Tags</Text>
+                <Box border={'1.5px solid #1EBF99'} p={'.4rem'}
+                     justifyContent={'space-between'} width={'450px'} minHeight={'70px'}
+                     position={'relative'}>
+                    {console.log(form.values, form.errors)}
+                    <Flex flexWrap={'wrap'}>
+                        {form.values.tags.map(
+                            ({tag_id, tag}, i) => (
+                                <SelectedItemRenderer
+                                    key={i} value={tag_id}
+                                    label={tag}
+                                    handleDelete={() => {
+                                        setFieldValue('tags', form.values.tags.filter(obj => obj.tag_id !== tag_id))
+                                        setPickerItems(prevState => {
+                                            console.log('tagOptions', tagOptions)
+                                            console.log('prevState', prevState)
+                                            if (tagOptions.some(obj => obj.tag_id === tag_id)
+                                                && !prevState.some(obj => obj.tag_id === tag_id)
+                                            ) {
+                                                prevState.push({
+                                                    tag_id,
+                                                    tag
+                                                })
+                                            }
+                                            return JSON.parse(JSON.stringify(prevState))
+                                        })
+                                    }}/>
+                            )
+                        )}
+                    </Flex>
+                    <FormControl>
+                        <Input
+                            onFocus={() => {
+                                setShowSuggestions(true)
+                            }}
+                            // onChange
+                            onBlur={() => {
+                                setShowSuggestions(false)
+                            }}
+                            onChange={(ev) => setCurrentVal(ev.target.value)}
+                            value={currentVal}
+                            variant={'unstyled'}
+                            id={'tagInput'}
+                            type="text" placeholder="Type to add tag" width={'10ch'}
+                        />
+                    </FormControl>
+                    {
+                        // It breaks the the layout at bottom of the screen when showed
+                        // solution would be a scroll able vie
+                        showSuggestions &&
+                        <TagSuggestions
+                            status={status}
+                            items={
+                                pickerItems && pickerItems.filter(item => (
+                                    currentVal && (
+                                        !form.values.tags.some(t=> t.tag_id === item.tag_id)
+                                        ) && new RegExp(`.*${currentVal}.*`, 'i').test(item.tag.split(',')[0]))
+                                )
+                            }
+                            currentValue={currentVal}
+                            handleSuggestionItemClick={
+                                (obj) => {
+                                    setFieldValue('tags', [...form.values.tags, obj])
 
-                items={pickerItems}
-                itemRenderer={customRender}
-                hideToggleButton={true}
-                createItemRenderer={customCreateItemRender}
-                selectedItems={selectedItems}
-                onSelectedItemsChange={(changes) => {
-                    handleSelectedItemsChange(changes.selectedItems)
-                    setFieldValue('tags', changes.selectedItems)
-                }
-                }
-            />
-        )
-        }/>
+                                    setPickerItems(prevState => prevState.filter(prevObj => prevObj.tag_id !== obj.tag_id))
+                                }
+                            }
+                            handleCreateItem={async (tag) => {
+                                // iterate over the the tags
+                                let newTag = await create(tag)
+                                setFieldValue('tags', [...form.values.tags, newTag])
+                                // console.log('newly created tag', newTag)
+                                setCurrentVal('')
+                                // if (newTag){}
+                            }}
+                            size={'sm'}/>
+                    }
 
+                </Box>
+            </FormControl>
+        )}/>
     );
 }

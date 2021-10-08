@@ -1,24 +1,25 @@
 import React from "react";
-import getAllAddresses from "../api/property";
-export default function useAddresses(){
+import { getAllAddresses } from "../api";
+
+export default function useAddresses() {
     const [status, setStatus] = React.useState('loading')
     const [error, setError] = React.useState()
-    const [addresses, setAddresses] = React.useState([{"property_id":74,"full_address":"1976 W Red Hawk Trl Unit 2, Park City, UT, 84098"},{"property_id":75,"full_address":"3770 N Highway 224, Park City, UT, 84060"},{"property_id":76,"full_address":"517 Park Ave, Park City, UT, 84060"},{"property_id":77,"full_address":"9734 N Overhill Rd, Park City, UT, 84098"},{"property_id":78,"full_address":"1642 Northshore Ct, Park City, UT, 84098"},{"property_id":79,"full_address":"120 St Moritz Ter, Park City, UT, 84098"},{"property_id":80,"full_address":"8990 N Upper Lando Ln, Park City, UT, 84098"},{"property_id":81,"full_address":"264 White Pine Canyon Rd, Park City, UT, 84060"},{"property_id":82,"full_address":"4094 W Sierra Dr Unit 226, Park City, UT, 84098"},{"property_id":83,"full_address":"12 Red Hawk Ln, Park City, UT, 84098"},{"property_id":84,"full_address":"9325 Back Nine Cir, Park City, UT, 84098"},{"property_id":85,"full_address":"547 Parleys Rd, Park City, UT, 84098"},{"property_id":86,"full_address":"2718 E Bitter Brush Dr, Park City, UT, 84098"},{"property_id":87,"full_address":"615 Woodside Ave, Park City, UT, 84060"},{"property_id":88,"full_address":"110 Hidden Oaks Ln, Park City, UT, 84060"},{"property_id":89,"full_address":"3817 Aspen Camp Loop, Park City, UT, 84098"},{"property_id":90,"full_address":"7019 Robins Nest Ln Unit 57, Park City, UT, 84098"},{"property_id":91,"full_address":"5874 Cobalt Cir, Park City, UT, 84098"},{"property_id":92,"full_address":"187 White Pine Canyon Rd, Park City, UT, 84060"},{"property_id":93,"full_address":"6782 Woods Rose Drive, Park City, UT, 84098"},{"property_id":94,"full_address":"3533 Big Spruce Way, Park City, UT, 84098"},{"property_id":95,"full_address":"7475 Buckboard Dr, Park City, UT, 84098"},{"property_id":96,"full_address":"1360 Golden Way, Park City, UT, 84060"},{"property_id":97,"full_address":"500 Deer Valley Dr Units 1 & 2, Park City, UT, 84060"},{"property_id":98,"full_address":"1481 E Tollgate Rd, Park City, UT, 84098"},{"property_id":99,"full_address":"960 W Deer Hill Rd, Park City, UT, 84098"},{"property_id":100,"full_address":"3172 Wapiti Canyon Rd, Park City, UT, 84098"},{"property_id":101,"full_address":"4348 W Hidden Cove Rd, Park City, UT, 84098"},{"property_id":102,"full_address":"221 Norfolk Ave, Park City, UT, 84060"},{"property_id":103,"full_address":"5874 Cobalt Cir, Park City, UT, 84098"},{"property_id":104,"full_address":"3244 American Saddler Dr, Park City, UT, 84060"},{"property_id":105,"full_address":"509 Parleys Rd, Park City, UT, 84098"},{"property_id":106,"full_address":"31 Sandstone Cv, Park City, UT, 84060"},{"property_id":107,"full_address":"370 Mountain Top Dr, Park City, UT, 84060"},{"property_id":108,"full_address":"4106 W Sierra Dr Unit 225, Park City, UT, 84098"},{"property_id":109,"full_address":"5956 Fairview Dr, Park City, UT, 84098"},{"property_id":110,"full_address":"8710 N Promontory Ridge Dr, Park City, UT, 84098"},{"property_id":111,"full_address":"3902 Aspen Camp Loop, Park City, UT, 84098"},{"property_id":112,"full_address":"1500 Red Fox Rd, Park City, UT, 84098"},{"property_id":113,"full_address":"1360 Empire Ave Unit A, Park City, UT, 84060"},{"property_id":114,"full_address":"3332 Solamere Dr, Park City, UT, 84060"},{"property_id":115,"full_address":"7971 N Westhills Trl, Park City, UT, 84098"},{"property_id":116,"full_address":"2189 White Pine Canyon Rd, Park City, UT, 84060"},{"property_id":117,"full_address":"9272 Dye Cabins Dr Unit 23, Park City, UT, 84098"},{"property_id":118,"full_address":"227 White Pine Canyon Rd, Park City, UT, 84060"},{"property_id":119,"full_address":"213 White Pine Canyon Rd, Park City, UT, 84060"},{"property_id":120,"full_address":"3760 Rising Star Ln, Park City, UT, 84060"},{"property_id":121,"full_address":"6782 Woods Rose Drive, Park City, UT, 84098"},{"property_id":122,"full_address":"4082 W Sierra Dr Unit 227, Park City, UT, 84098"},{"property_id":123,"full_address":"7560 N Westhills Trl, Park City, UT, 84098"},{"property_id":124,"full_address":"229 Parleys Rd, Park City, UT, 84098"},{"property_id":125,"full_address":"7721 N Westhills Trl, Park City, UT, 84098"},{"property_id":126,"full_address":"4117 N 250 E, Park City, UT, 84098"},{"property_id":127,"full_address":"3838 Solamere Dr, Park City, UT, 84060"},{"property_id":128,"full_address":"4348 W Hidden Cove Rd Unit 78, Park City, UT, 84098"},{"property_id":129,"full_address":"140 15th St, Park City, UT, 84060"},{"property_id":130,"full_address":"8867 Parleys Ln, Park City, UT, 84098"},{"property_id":131,"full_address":"555 King Rd, Park City, UT, 84060"},{"property_id":132,"full_address":"270 Aspen Dr Unit Ddr, Park City, UT, 84098"},{"property_id":133,"full_address":"1220 State Road 248, Park City, UT, 84098"},{"property_id":134,"full_address":"4042 W Sierra Dr Unit 230, Park City, UT, 84098"},{"property_id":135,"full_address":"8200 E Royal St Unit 50, Park City, UT, 84060"},{"property_id":136,"full_address":"4056 W Sierra Dr Unit 229, Park City, UT, 84098"},{"property_id":137,"full_address":"3817 Aspen Camp Loop Unit 71, Park City, UT, 84098"},{"property_id":138,"full_address":"7893 Red Tail Ct, Park City, UT, 84060"},{"property_id":139,"full_address":"555 King Rd, Park City, UT, 84060"},{"property_id":140,"full_address":"2374 Appaloosa Ln, Park City, UT, 84098"},{"property_id":141,"full_address":"3853 Rising Star Ln, Park City, UT, 84060"},{"property_id":142,"full_address":"1645 E Tollgate Rd, Park City, UT, 84098"},{"property_id":143,"full_address":"182 White Pine Canyon Rd, Park City, UT, 84060"},{"property_id":144,"full_address":"3204 Wapiti Canyon Rd, Park City, UT, 84098"},{"property_id":145,"full_address":"253 White Pine Canyon Rd, Park City, UT, 84060"},{"property_id":146,"full_address":"5886 Cobalt Cir, Park City, UT, 84098"}])
+    const [addresses, setAddresses] = React.useState([])
 
-    const refetch = async ()=>{
-        try{
+    const refetch = async () => {
+        try {
             setStatus('loading')
             let addresses = await getAllAddresses()
             setAddresses(addresses)
             setStatus('success')
-        }catch (e) {
+        } catch (e) {
             setStatus('error')
             setError(e.message)
         }
     }
-    React.useEffect(()=>{
-        // refetch()
-    },[])
+    React.useEffect(() => {
+        refetch()
+    }, [])
 
     return {
         addresses,
