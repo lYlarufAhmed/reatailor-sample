@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, Flex, Box, Input, FormControl} from '@chakra-ui/react'
+import {Text, Flex, Box, Input, FormControl, Progress} from '@chakra-ui/react'
 import {FieldArray} from "formik";
 import TagSuggestions from "./TagSuggestions";
 import useTags from "../hooks/useTags";
@@ -47,7 +47,6 @@ export default function TagsField({setFieldValue}) {
                 <Box border={'1.5px solid #1EBF99'} p={'.4rem'}
                      justifyContent={'space-between'} width={'450px'} minHeight={'70px'}
                      position={'relative'}>
-                    {console.log(form.values, form.errors)}
                     <Flex flexWrap={'wrap'}>
                         {form.values.tags.map(
                             ({tag_id, tag}, i) => (
@@ -92,33 +91,34 @@ export default function TagsField({setFieldValue}) {
                     {
                         // It breaks the the layout at bottom of the screen when showed
                         // solution would be a scroll able vie
-                        showSuggestions &&
-                        <TagSuggestions
-                            status={status}
-                            items={
-                                pickerItems && pickerItems.filter(item => (
-                                    currentVal && (
-                                        !form.values.tags.some(t=> t.tag_id === item.tag_id)
-                                        ) && new RegExp(`.*${currentVal}.*`, 'i').test(item.tag.split(',')[0]))
-                                )
-                            }
-                            currentValue={currentVal}
-                            handleSuggestionItemClick={
-                                (obj) => {
-                                    setFieldValue('tags', [...form.values.tags, obj])
-
-                                    setPickerItems(prevState => prevState.filter(prevObj => prevObj.tag_id !== obj.tag_id))
+                        status === 'loading' ? <Progress size="xs" isIndeterminate/> :
+                            showSuggestions &&
+                            <TagSuggestions
+                                items={
+                                    pickerItems && pickerItems.filter(item => (
+                                            currentVal && (
+                                                !form.values.tags.some(t => t.tag_id === item.tag_id)
+                                            ) && new RegExp(`.*${currentVal}.*`, 'i').test(item.tag.split(',')[0]))
+                                    )
                                 }
-                            }
-                            handleCreateItem={async (tag) => {
-                                // iterate over the the tags
-                                let newTag = await create(tag)
-                                setFieldValue('tags', [...form.values.tags, newTag])
-                                // console.log('newly created tag', newTag)
-                                setCurrentVal('')
-                                // if (newTag){}
-                            }}
-                            size={'sm'}/>
+                                currentValue={currentVal}
+                                handleSuggestionItemClick={
+                                    (obj) => {
+                                        setFieldValue('tags', [...form.values.tags, obj])
+
+                                        setPickerItems(prevState => prevState.filter(prevObj => prevObj.tag_id !== obj.tag_id))
+                                        setCurrentVal('')
+                                    }
+                                }
+                                handleCreateItem={async (tag) => {
+                                    // iterate over the the tags
+                                    let newTag = await create(tag)
+                                    setFieldValue('tags', [...form.values.tags, newTag])
+                                    // console.log('newly created tag', newTag)
+                                    setCurrentVal('')
+                                    // if (newTag){}
+                                }}
+                                size={'sm'}/>
                     }
 
                 </Box>

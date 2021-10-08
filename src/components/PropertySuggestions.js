@@ -1,4 +1,4 @@
-import {Progress, Table, Tbody, Td, Text, Tr} from "@chakra-ui/react";
+import {Progress, Table, Tbody, Td, Tr} from "@chakra-ui/react";
 
 
 function SuggestionItem({value, handleSuggestionItemClick}) {
@@ -25,7 +25,7 @@ export default function PropertySuggestions({
             <Table backgroundColor={"white"} variant="simple" {...styleProps}
                    position={'absolute'} zIndex={'3'}>
                 <Tbody>
-                    {values.map(([itemId, itemValue]) => <SuggestionItem key={itemValue}
+                    {values.map(([itemId, itemValue]) => <SuggestionItem key={itemId}
                                                                          handleSuggestionItemClick={() => handleSuggestionItemClick(itemId, itemValue)}
                                                                          value={itemValue}/>)}
                 </Tbody>

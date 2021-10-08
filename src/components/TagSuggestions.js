@@ -35,19 +35,16 @@ export default function TagSuggestions({
         <Box height={'5rem'} overflowY={'scroll'} overflowX={'hidden'} position={'absolute'} zIndex={'3'}>
 
 
-            {status === 'loading' ? <Progress size="xs" isIndeterminate/> : (
-
-                <Table backgroundColor={"white"} variant="simple" {...styleProps}
-                >
-                    <Tbody>
-                        {currentValue &&
-                        <CreateItemRenderer handleCreateItem={handleCreateItem} typedValue={currentValue}/>}
-                        {values && values.map((item) => <SuggestionItem key={item.tag}
-                                                                        handleSuggestionItemClick={handleSuggestionItemClick}
-                                                                        tagObj={item}/>)}
-                    </Tbody>
-                </Table>
-            )}
+            <Table backgroundColor={"white"} variant="simple" {...styleProps}
+            >
+                <Tbody>
+                    {currentValue &&
+                    <CreateItemRenderer handleCreateItem={handleCreateItem} typedValue={currentValue}/>}
+                    {values && values.map((item) => <SuggestionItem key={item.tag}
+                                                                    handleSuggestionItemClick={handleSuggestionItemClick}
+                                                                    tagObj={item}/>)}
+                </Tbody>
+            </Table>
         </Box>
     )
 }

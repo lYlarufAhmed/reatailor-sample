@@ -11,6 +11,7 @@ export default function useAddresses() {
             await postProperty(values)
             // setAddresses(addresses)
             setStatus('success')
+            setError('')
         } catch (e) {
             setStatus('error')
             setError(e.message)
