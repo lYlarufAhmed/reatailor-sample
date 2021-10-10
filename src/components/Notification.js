@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, AlertDescription, AlertIcon, AlertTitle, useToast} from "@chakra-ui/react";
+import {Alert, AlertDescription, AlertIcon, AlertTitle} from "@chakra-ui/react";
 
 const Notification = () => {
 

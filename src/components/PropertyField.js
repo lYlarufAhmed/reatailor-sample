@@ -25,7 +25,9 @@ function ItemRenderer(itemId, itemValue) {
 
 export default function PropertyField({setFieldValue}) {
     // TODO: Create a context to pass the status and handleClick to the child component
-    const {addresses, status, error} = useAddresses()
+    const {addresses, status
+        // , error
+    } = useAddresses()
     const [term, setTerm] = React.useState()
     const filteredAddress = useFilteredAddresses({addresses, searchTerm: term})
     const dispatch = useDispatch()

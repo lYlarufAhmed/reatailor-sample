@@ -1,6 +1,7 @@
 import {
     Flex, Icon,
-    FormControl, InputGroup, InputLeftElement, Input, Box, Spacer, Button, Select, Textarea, Text, useToast
+    FormControl, InputGroup, InputLeftElement, Input, Box, Spacer, Button, Select, Textarea, Text
+    // , useToast
 } from "@chakra-ui/react";
 import PropertyField from "../components/PropertyField";
 import * as yup from 'yup'
@@ -62,7 +63,9 @@ const initialFormValue = {
 // TODO: Create a form context for ????
 export default function PropertyInput() {
     const [submitted, setSubmitted] = React.useState(false)
-    const {postProperty, status, error} = useProperty()
+    const {postProperty,
+        // , status,
+        error} = useProperty()
     const [foundError, setFoundError] = React.useState(!!error)
     React.useEffect(() => {
         if (submitted || foundError) {

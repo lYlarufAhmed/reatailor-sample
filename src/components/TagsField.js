@@ -5,14 +5,14 @@ import TagSuggestions from "./TagSuggestions";
 import useTags from "../hooks/useTags";
 
 // TODO: make a network call
-const tags = [
-    {tag_id: '1', tag: 'Ski Resort'},
-    {tag_id: '2', tag: 'Hot Tub'},
-    {tag_id: '3', tag: 'Mountain Views'},
-    {tag_id: '4', tag: 'Recently Updated'},
-    {tag_id: '5', tag: 'Private Pool'},
-    {tag_id: '6', tag: 'Resort Pool'},
-]
+// const tags = [
+//     {tag_id: '1', tag: 'Ski Resort'},
+//     {tag_id: '2', tag: 'Hot Tub'},
+//     {tag_id: '3', tag: 'Mountain Views'},
+//     {tag_id: '4', tag: 'Recently Updated'},
+//     {tag_id: '5', tag: 'Private Pool'},
+//     {tag_id: '6', tag: 'Resort Pool'},
+// ]
 
 
 function SelectedItemRenderer({value, label, handleDelete}) {
@@ -31,7 +31,9 @@ function SelectedItemRenderer({value, label, handleDelete}) {
 export default function TagsField({setFieldValue}) {
     // the items showed in the suggestion dropdown ( fetched from db and are not selected)
     // TODO: do a fetch call
-    const {tags: tagOptions, create, status, error} = useTags()
+    const {tags: tagOptions, create, status
+        // , error
+    } = useTags()
     const [pickerItems, setPickerItems] = React.useState(tagOptions);
     const [showSuggestions, setShowSuggestions] = React.useState(false)
     const [currentVal, setCurrentVal] = React.useState('')

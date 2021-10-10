@@ -1,5 +1,5 @@
 import React from "react";
-import {getAllAddresses} from "../api";
+// import {getAllAddresses} from "../api";
 
 export default function useAddresses() {
     const [status, setStatus] = React.useState('loading')

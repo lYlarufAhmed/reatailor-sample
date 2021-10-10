@@ -1,4 +1,6 @@
-import {Box, Progress, Table, Tbody, Td, Text, Tr} from "@chakra-ui/react";
+import {Box,
+    // , Progress,
+    Table, Tbody, Td, Text, Tr} from "@chakra-ui/react";
 
 
 function SuggestionItem({tagObj, handleSuggestionItemClick}) {
