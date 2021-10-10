@@ -44,7 +44,7 @@ let validateSchema = yup.object({
             tag: yup.string().required()
         })
     )
-    .required().min(3, 'Minimum 3 tags required!')
+        .required().min(3, 'Minimum 3 tags required!')
 })
 const initialFormValue = {
     address_line: '',
@@ -88,7 +88,7 @@ export default function PropertyInput() {
                     await postProperty(values)
                     if (error) {
                         setFoundError(true)
-                    } else{
+                    } else {
                         setSubmitted(true)
                         console.log('form reset')
                         resetForm(initialFormValue)
@@ -101,7 +101,6 @@ export default function PropertyInput() {
                           backgroundColor={'#F4F6FA'} p={'1rem 0'}>
                         <Flex direction={'column'} justifyContent={'center'}
                               alignItems={'center'} as={Form} width={'450px'}>
-
                             <Box position={'relative'} width={'100%'}>
                                 <PropertyField setFieldValue={props.setFieldValue}/>
                             </Box>
@@ -133,9 +132,10 @@ export default function PropertyInput() {
                                     <InputGroup>
                                         <InputLeftElement pointerEvents={'none'} children={<Icon as={SendIcon}/>}/>
                                         <Field name={'prop_type'} placeholder={'Select One'} icon={<ArrowDownIcon/>}
-                                               component={Select} style={{
-                                            paddingLeft: '30px'
-                                        }}>
+                                               as={Select}
+                                               style={{
+                                                   paddingLeft: '30px'
+                                               }}>
                                             {[...Object.entries(selectOptions)].map(op => (
                                                 <option value={op[0]}
                                                         onClick={() => props.setFieldValue('prop_type', op[0])}>{op[1]}</option>
